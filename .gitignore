@@ -10,4 +10,3 @@
 .idea
 ###< symfony/framework-bundle ###
 composer.json
-composer.lock
