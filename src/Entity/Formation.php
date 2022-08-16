@@ -19,9 +19,6 @@ class Formation
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $intitule = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_debut = null;
 
@@ -49,18 +46,6 @@ class Formation
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getIntitule(): ?string
-    {
-        return $this->intitule;
-    }
-
-    public function setIntitule(string $intitule): self
-    {
-        $this->intitule = $intitule;
 
         return $this;
     }
