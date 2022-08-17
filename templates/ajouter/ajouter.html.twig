@@ -3,5 +3,55 @@
 {% block title %}Ajouter{% endblock %}
 
 {% block body %}
-
+    <div>
+        <h2>Ajouter un nouveau personnel :</h2>
+        {{ form_start(utilisateurForm) }}
+        <div>
+            <p>{{ form_label(utilisateurForm.email) }} : </p>
+            {{ form_widget(utilisateurForm.email) }}
+            {{ form_errors(utilisateurForm.email) }}
+        </div>
+        <div>
+            <p>{{ form_label(utilisateurForm.password) }} : </p>
+            {{ form_widget(utilisateurForm.password) }}
+            {{ form_errors(utilisateurForm.password) }}
+        </div>
+        <div>
+            <p>{{ form_label(utilisateurForm.nom) }} : </p>
+            {{ form_widget(utilisateurForm.nom) }}
+            {{ form_errors(utilisateurForm.nom) }}
+        </div>
+        <div>
+            <p>{{ form_label(utilisateurForm.prenom) }} : </p>
+            {{ form_widget(utilisateurForm.prenom) }}
+            {{ form_errors(utilisateurForm.prenom) }}
+        </div>
+        <div>
+            <p>{{ form_widget(utilisateurForm.Envoyez) }}</p>
+            {{ form_end(utilisateurForm) }}
+        </div>
+    </div>
+    <div>
+        <h2>Ajouter une nouvelle formation :</h2>
+        {{ form_start(formationForm) }}
+        <div>
+            <p>{{ form_label(formationForm.nom) }} : </p>
+            {{ form_widget(formationForm.nom) }}
+            {{ form_errors(formationForm.nom) }}
+        </div>
+        <div>
+            <p>{{ form_label(formationForm.date_debut) }} : </p>
+            {{ form_widget(formationForm.date_debut) }}
+            {{ form_errors(formationForm.date_debut) }}
+        </div>
+        <div>
+            <p>{{ form_label(formationForm.date_fin) }} : </p>
+            {{ form_widget(formationForm.date_fin) }}
+            {{ form_errors(formationForm.date_fin) }}
+        </div>
+        <div>
+            <p>{{ form_widget(formationForm.Envoyez) }}</p>
+            {{ form_end(formationForm) }}
+        </div>
+    </div>
 {% endblock %}

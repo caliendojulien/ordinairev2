@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-
+use App\Form\AjouterFType;
+use App\Form\AjouterType;
 use App\Repository\ReservationRepository;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
 use App\Repository\FormationRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,8 +40,6 @@ class AccueilController extends AbstractController
             ]
         );
     }
-
-
 
     #[Route('/liste', '_listeUtilisateursFormations')]
     public function listeUtilisateurFormation(
@@ -75,4 +75,33 @@ class AccueilController extends AbstractController
         return $this->redirectToRoute('accueil_listeUtilisateursFormations');
     }
 
+    #[Route('/ajouter', '_ajouter')]
+    public function ajouterUtilisateurFormation(
+        Request                $request,
+        EntityManagerInterface $em
+    ): Response
+    {
+        $utilisateur = new Utilisateur();
+        $formation = new Formation();
+        $utilisateurForm = $this->createForm(AjouterType::class, $utilisateur);
+        $formationForm = $this->createForm(AjouterFType::class, $formation);
+        $utilisateurForm->handleRequest($request);
+        $formationForm->handleRequest($request);
+
+        if ($utilisateurForm->isSubmitted() && $utilisateurForm->isValid()) {
+            $utilisateur->setRoles(['ROLE_USER']);
+            $em->persist($utilisateur);
+            $em->flush();
+            return $this->redirectToRoute('accueil_ajouter');
+        }
+
+        if ($formationForm->isSubmitted() && $formationForm->isValid()) {
+            $em->persist($formation);
+            $em->flush();
+            return $this->redirectToRoute('accueil_ajouter');
+        }
+
+        return $this->renderForm('ajouter/ajouter.html.twig',
+            compact('utilisateurForm', 'formationForm'));
+    }
 }
