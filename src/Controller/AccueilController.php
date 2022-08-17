@@ -25,6 +25,7 @@ class AccueilController extends AbstractController
         return $this->render('base.html.twig');
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/affichage', name: '_affichage')]
     public function affichage(Request $request, EntityManagerInterface $entityManager, ReservationRepository $repository): Response
     {
@@ -41,6 +42,7 @@ class AccueilController extends AbstractController
         );
     }
 
+    #[IsGranted("ROLE_SUPER_ADMIN")]
     #[Route('/liste', '_listeUtilisateursFormations')]
     public function listeUtilisateurFormation(
         UtilisateurRepository $utilisateurRepository,
@@ -53,6 +55,7 @@ class AccueilController extends AbstractController
             compact('listeUtilisateurs', 'listeFormations'));
     }
 
+    #[IsGranted("ROLE_SUPER_ADMIN")]
     #[Route('/supprimer/u/{utilisateur}', '_supprimerU')]
     public function supprimerUtilisateur(
         EntityManagerInterface $em,
@@ -64,6 +67,7 @@ class AccueilController extends AbstractController
         return $this->redirectToRoute('accueil_listeUtilisateursFormations');
     }
 
+    #[IsGranted("ROLE_SUPER_ADMIN")]
     #[Route('/supprimer/f/{formation}', '_supprimerF')]
     public function supprimerFormation(
         EntityManagerInterface $em,
@@ -75,6 +79,7 @@ class AccueilController extends AbstractController
         return $this->redirectToRoute('accueil_listeUtilisateursFormations');
     }
 
+    #[IsGranted("ROLE_SUPER_ADMIN")]
     #[Route('/ajouter', '_ajouter')]
     public function ajouterUtilisateurFormation(
         Request                $request,
