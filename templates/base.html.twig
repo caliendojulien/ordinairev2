@@ -14,25 +14,6 @@
         <h1>Décompte rationnaire</h1>
         <img src="{{ asset('media/DEF_MOB.png') }}" id="logoDEFMOB" width="20%">
     </header>
-
-    <ul>
-
-        <li> <a href="{{ path('accueil_affichage') }}">Affichage</a></li>
-        {% if app.user %}
-            <li> <a href="{{ path('app_logout') }}">DECONNECTION</a></li>
-
-        {% endif %}
-        {% if not app.user %}
-            <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
-
-        {% endif %}
-    </ul>
-
-        {% block body %}
-
-    <img src="{{ asset('media/CMFP.png') }}" id="logoCMFP">
-    <img src="{{ asset('media/DEF_MOB.png') }}" id="logoDEFMOB">
-    <h1>Décompte rationnaire</h1>
     <nav>
         <ul>
             {% if is_granted('ROLE_ADMIN') %}
@@ -49,6 +30,11 @@
             {% endif %}
         </ul>
     </nav>
+
+
+        {% block body %}
+
+
         {% endblock %}
     </body>
 </html>
