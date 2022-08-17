@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
+use App\Entity\Utilisateur;
+use App\Repository\FormationRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,30 +20,39 @@ class AccueilController extends AbstractController
         return $this->render('base.html.twig');
     }
 
-    #[Route('/liste', '_listeUtilisateurs')]
+    #[Route('/liste', '_listeUtilisateursFormations')]
     public function listeUtilisateurFormation(
-        EntityManagerInterface $em,
-        UtilisateurRepository  $utilisateurRepository
+        UtilisateurRepository  $utilisateurRepository,
+        FormationRepository    $formationRepository
     ): Response
     {
         $listeUtilisateurs = $utilisateurRepository->findAll();
-        return $this->render('',
-            compact('listeUtilisateurs'));
+        $listeFormations = $formationRepository->findAll();
+        return $this->render('affichage_suppression_utilisateur_formation/affichageSuppresion.html.twig',
+            compact('listeUtilisateurs', 'listeFormations'));
     }
 
-
-
-    #[Route('/supprimer/{utilisateur}', '_supprimer')]
-    public function supprimerUtilisateurFormation(
-        int                    $id,
+    #[Route('/supprimer/u/{utilisateur}', '_supprimerU')]
+    public function supprimerUtilisateur(
         EntityManagerInterface $em,
         Utilisateur            $utilisateur,
-        UtilisateurRepository  $utilisateurRepository
     ): Response
     {
-        $utilisateurID = $utilisateurRepository->find($id);
         $em->remove($utilisateur);
         $em->flush();
-        return $this->redirectToRoute('');
+        return $this->redirectToRoute('accueil_listeUtilisateursFormations');
     }
+
+    #[Route('/supprimer/f/{formation}', '_supprimerF')]
+    public function supprimerFormation(
+        EntityManagerInterface $em,
+        Formation            $formation,
+    ): Response
+    {
+        $em->remove($formation);
+        $em->flush();
+        return $this->redirectToRoute('accueil_listeUtilisateursFormations');
+    }
+
+
 }
