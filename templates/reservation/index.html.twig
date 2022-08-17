@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!{% endblock %}
+
+{% block body %}
+    <div id="lundi">
+        {{ form_start(formValidationRepas) }}
+        <div>
+            <p>Lundi {{ Lundi | date('d/m/y') }}</p>
+        </div>
+
+        <div>
+            <label for="{{ field_name(formValidationRepas.midi) }}">Midi</label>
+            <input type="checkbox"
+                   id="{{ field_name(formValidationRepas.midi) }}"
+                   name="{{ field_name(formValidationRepas.midi) }}"
+                   checked
+            >
+        </div>
+        <div>
+            <label for="{{ field_name(formValidationRepas.soir) }}">Soir</label>
+            <input type="checkbox"
+                   id="{{ field_name(formValidationRepas.soir) }}"
+                   name="{{ field_name(formValidationRepas.soir) }}"
+            >
+        </div>
+        <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+        <div>
+            <button>Envoyer</button>
+        </div>
+        {{ form_end(formValidationRepas, {'render_rest': false}) }}
+    </div>
+{% endblock %}
