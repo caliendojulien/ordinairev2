@@ -8,19 +8,23 @@
     <img src="{{ asset('media/CMFP.png') }}" id="logoCMFP">
     <img src="{{ asset('media/DEF_MOB.png') }}" id="logoDEFMOB">
     <h1>Décompte rationnaire</h1>
-        {% block body %}
-            <ul>
-
+    <nav>
+        <ul>
+            {% if is_granted('ROLE_ADMIN') %}
                 <li> <a href="{{ path('accueil_affichage') }}">Affichage</a></li>
-                {% if app.user %}
-                    <li> <a href="{{ path('app_logout') }}">DECONNECTION</a></li>
-
-                {% endif %}
-                {% if not app.user %}
-                    <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
-
-                {% endif %}
-            </ul>
+            {% endif %}
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li><a href="{{ path('accueil_listeUtilisateursFormations') }}">Gestion</a></li>
+            {% endif %}
+            {% if app.user %}
+                <li> <a href="{{ path('app_logout') }}">Déconnection</a></li>
+            {% endif %}
+            {% if not app.user %}
+                <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+        {% block body %}
 
         {% endblock %}
     </body>

@@ -25,17 +25,6 @@ class Reservation
     #[ORM\Column]
     private ?bool $soir = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $utilisateur = null;
-
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'reservation')]
-    private Collection $utilisateurs;
-
-    public function __construct()
-    {
-        $this->utilisateurs = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -77,42 +66,4 @@ class Reservation
         return $this;
     }
 
-    public function getUtilisateur(): ?string
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(string $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getUtilisateurs(): Collection
-    {
-        return $this->utilisateurs;
-    }
-
-    public function addUtilisateur(Utilisateur $utilisateur): self
-    {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUtilisateur(Utilisateur $utilisateur): self
-    {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeReservation($this);
-        }
-
-        return $this;
-    }
 }
