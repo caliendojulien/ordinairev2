@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <form>
+    <form id="affichageForm">
         <label> Choisir une date:
             <input type="date" name="calendrier" id="calendrier" >
         </label>
@@ -12,9 +12,9 @@
 
     <h2>AFFICHAGE</h2>
 
-    <div>
-        <h2>Date :  {{ dateCalendrier}} </h2>
-        <table>
+    <div id="tableAffichage">
+        <h3>Date :  {{ dateCalendrier}} </h3>
+        <table >
             <tr>
                 <th></th>
                 <th>Midi</th>

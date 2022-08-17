@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
+
 use App\Repository\ReservationRepository;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
@@ -24,7 +24,7 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/affichage', name: '_affichage')]
-    public function affichage(Request $request,EntityManagerInterface $entityManager, ReservationRepository $repository): Response
+    public function affichage(Request $request, EntityManagerInterface $entityManager, ReservationRepository $repository): Response
     {
         $dateCalendrier = $request->get("calendrier");
         $cptMidi = $repository->count(['midi' => 1, 'date' => new \DateTime($dateCalendrier)]);
@@ -37,11 +37,14 @@ class AccueilController extends AbstractController
                 'cptSoir' => $cptSoir
             ]
         );
-        
+    }
+
+
+
     #[Route('/liste', '_listeUtilisateursFormations')]
     public function listeUtilisateurFormation(
-        UtilisateurRepository  $utilisateurRepository,
-        FormationRepository    $formationRepository
+        UtilisateurRepository $utilisateurRepository,
+        FormationRepository   $formationRepository
     ): Response
     {
         $listeUtilisateurs = $utilisateurRepository->findAll();
@@ -64,11 +67,12 @@ class AccueilController extends AbstractController
     #[Route('/supprimer/f/{formation}', '_supprimerF')]
     public function supprimerFormation(
         EntityManagerInterface $em,
-        Formation            $formation,
+        Formation              $formation,
     ): Response
     {
         $em->remove($formation);
         $em->flush();
         return $this->redirectToRoute('accueil_listeUtilisateursFormations');
     }
+
 }
