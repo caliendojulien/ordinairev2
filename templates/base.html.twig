@@ -9,7 +9,19 @@
     <img src="{{ asset('media/DEF_MOB.png') }}" id="logoDEFMOB">
     <h1>Décompte rationnaire</h1>
         {% block body %}
-            <a href="{{ path('app_login') }}">Se Connecter</a>
+            <ul>
+
+                <li> <a href="{{ path('accueil_affichage') }}">Affichage</a></li>
+                {% if app.user %}
+                    <li> <a href="{{ path('app_logout') }}">DECONNECTION</a></li>
+
+                {% endif %}
+                {% if not app.user %}
+                    <li><a href="{{ path('app_login') }}">Se Connecter</a></li>
+
+                {% endif %}
+            </ul>
+
         {% endblock %}
     </body>
 </html>
