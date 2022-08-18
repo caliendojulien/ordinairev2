@@ -21,6 +21,7 @@
             {% endif %}
             {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li><a href="{{ path('accueil_listeUtilisateursFormations') }}">Gestion</a></li>
+                <li><a href="{{ path('admin') }}">Dashboard Admin</a></li>
             {% endif %}
             {% if is_granted('ROLE_UTILISATEUR') %}
                 <li><a href="{{ path('app_reservation') }}">Réservation</a></li>
