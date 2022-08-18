@@ -5,6 +5,7 @@
 {% block body %}
     <div class="ajouterForms">
         <h2>Ajouter un nouveau personnel :</h2>
+        {# Formulaire permettant d'ajouter des utilisateurs #}
         {{ form_start(utilisateurForm) }}
         <div>
             <p>{{ form_label(utilisateurForm.email) }} : </p>
@@ -33,6 +34,7 @@
     </div>
     <div  class="ajouterForms">
         <h2>Ajouter une nouvelle formation :</h2>
+        {# Formulaire permettant d'ajouter des formations #}
         {{ form_start(formationForm) }}
         <div>
             <p>{{ form_label(formationForm.nom) }} : </p>
