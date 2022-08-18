@@ -62,6 +62,10 @@ h2{
 }
 
 .affichageSupprimerH2{
+
+
+    margin-left: 20em;
+    margin-right: 20em;
     border-top: 1px solid black;
     border-bottom:  1px solid black;
     font-family: "Microsoft JhengHei UI Light";
