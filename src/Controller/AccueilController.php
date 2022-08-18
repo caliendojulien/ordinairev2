@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\AjouterFType;
-use App\Form\AjouterType;
+use App\Form\AjouterUType;
 use App\Repository\ReservationRepository;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -112,19 +113,27 @@ class AccueilController extends AbstractController
     #[IsGranted("ROLE_SUPER_ADMIN")]
     #[Route('/ajouter', '_ajouter')]
     public function ajouterUtilisateurFormation(
-        Request                $request,
-        EntityManagerInterface $em
+        Request                     $request,
+        EntityManagerInterface      $em,
+        UserPasswordHasherInterface $userPasswordHasher
     ): Response
     {
         $utilisateur = new Utilisateur();
         $formation = new Formation();
-        $utilisateurForm = $this->createForm(AjouterType::class, $utilisateur);
+        $utilisateurForm = $this->createForm(AjouterUType::class, $utilisateur);
         $formationForm = $this->createForm(AjouterFType::class, $formation);
+
         $utilisateurForm->handleRequest($request);
         $formationForm->handleRequest($request);
 
         if ($utilisateurForm->isSubmitted() && $utilisateurForm->isValid()) {
             $utilisateur->setRoles(['ROLE_USER']);
+            $utilisateur->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $utilisateur,
+                    $utilisateurForm->get('password')->getData()
+                )
+            );
             $em->persist($utilisateur);
             $em->flush();
             return $this->redirectToRoute('accueil_ajouter');
