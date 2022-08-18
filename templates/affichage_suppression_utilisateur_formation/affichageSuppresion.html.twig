@@ -5,22 +5,33 @@
 {% block body %}
     <div id="listes">
         <h2>Personnels :</h2>
+        {# Ce lien renvoi sur la page d'ajout des personnels #}
         <a href="{{ path('accueil_ajouter') }}">Ajouter un personnel</a>
         <div id="utilisateursListes">
+            {# Cette boucle for va permettre l'affichage des différentes informations que l'on veut afficher
+            sur les utilisateurs#}
             {% for u in listeUtilisateurs %}
                 <ul>
                     <li>
-                        <p>{{ u.nom }} {{ u.prenom }}, {{ u.email }}</p><a href="{{ path('accueil_supprimerU', {'utilisateur': u.id}) }}">Supprimer</a>
+                        {# Ici dans la boucle for on va afficher les informations que l'on veut pour chaque utilisateurs
+                        en BDD, et pour chaque utilisateur il y aura aussi un lien qui permettra la suppression #}
+                        <p>{{ u.nom }} {{ u.prenom }}, {{ u.email }}</p>
+                        <a href="{{ path('accueil_supprimerU', {'utilisateur': u.id}) }}">Supprimer</a>
                     </li>
                 </ul>
             {% endfor %}
         </div>
         <h2>Formations :</h2>
+        {# Ce lien renvoi sur la page d'ajout des formations #}
         <a href="{{ path('accueil_ajouter') }}">Ajouter une formation</a>
         <div>
+            {# Cette boucle for va permettre l'affichage des différentes informations que l'on veut afficher
+            sur les formations #}
             {% for f in listeFormations %}
                 <ul>
                     <li>
+                        {# Ici dans la boucle for on va afficher les informations que l'on veut pour chaque formation
+                        en BDD, et pour chaque formation il y aura aussi un lien qui permettra la suppression #}
                         <p>{{ f.nom }}</p><a href="{{ path('accueil_supprimerF', {'formation': f.id}) }}">Supprimer</a>
                     </li>
                 </ul>
