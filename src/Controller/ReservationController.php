@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
+    #[IsGranted("ROLE_UTILISATEUR")]
     #[Route('/reservation', name: 'app_reservation')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
