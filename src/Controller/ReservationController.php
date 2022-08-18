@@ -18,30 +18,166 @@ class ReservationController extends AbstractController
     {
         $numeroSemaine = new DateTime();
         $Lundi = strtotime('next monday +2 weeks');
+        $dateLundi = date("d/m/y", $Lundi);
+        $dateLundiFinal = DateTime::createFromFormat("d/m/y", $dateLundi);
+        $getLundi = getdate($Lundi);
         $Mardi = strtotime('next monday +2 weeks +1 day');
+        $dateMardi = date("d/m/y", $Mardi);
+        $dateMardiFinal = DateTime::createFromFormat("d/m/y", $dateMardi);
         $Mercredi = strtotime('next monday +2 weeks +2 days');
+        $dateMercredi = date("d/m/y", $Mercredi);
+        $dateMercrediFinal = DateTime::createFromFormat("d/m/y", $dateMercredi);
         $Jeudi = strtotime('next monday +2 weeks +3 days');
+        $dateJeudi = date("d/m/y", $Jeudi);
+        $dateJeudiFinal = DateTime::createFromFormat("d/m/y", $dateJeudi);
         $Vendredi = strtotime('next monday +2 weeks +4 days');
+        $dateVendredi = date("d/m/y", $Vendredi);
+        $dateVendrediFinal = DateTime::createFromFormat("d/m/y", $dateVendredi);
 
-        $LundiPlus = strtotime('next monday +3 weeks');
-        $MardiPlus = strtotime('next monday +3 weeks +1 day');
-        $MercrediPlus = strtotime('next monday +3 weeks +2 days');
-        $JeudiPlus = strtotime('next monday +3 weeks +3 days');
-        $VendrediPlus = strtotime('next monday +3 weeks +4 days');
+        $reservationLundi = new Reservation();
+        $formLundi = $this->createForm(ValidationRepasType::class, $reservationLundi);
+        $formLundi->handleRequest($request);
 
-        $reservation = new Reservation();
-        $form = $this->createForm(ValidationRepasType::class, $reservation);
+        $reservationMardi = new Reservation();
+        $formMardi = $this->createForm(ValidationRepasType::class, $reservationMardi);
+        $formMardi->handleRequest($request);
+
+        $reservationMercredi = new Reservation();
+        $formMercredi = $this->createForm(ValidationRepasType::class, $reservationMercredi);
+        $formMercredi->handleRequest($request);
+
+        $reservationJeudi = new Reservation();
+        $formJeudi = $this->createForm(ValidationRepasType::class, $reservationJeudi);
+        $formJeudi->handleRequest($request);
+
+        $reservationVendredi = new Reservation();
+        $formVendredi = $this->createForm(ValidationRepasType::class, $reservationVendredi);
+        $formVendredi->handleRequest($request);
+
+        $toutEnvoyer = new Reservation();
+        $form = $this->createForm(ValidationRepasType::class, $toutEnvoyer);
         $form->handleRequest($request);
-        dump($reservation);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($reservation);
+
+
+        if ($request->request->get('lundiEnvoyer', '') == 'lundiEnvoyer') {
+            if ($reservationLundi->isMidi()==null){
+                $reservationLundi->setMidi(false);
+            }
+            if ($reservationLundi->isSoir()==null){
+                $reservationLundi->setSoir(false);
+            }
+
+            $reservationLundi->setDate($dateLundiFinal);
+            $em->persist($reservationLundi);
             $em->flush();
 
-            $this->addFlash('succes','Repas valider merci à vous !!!');
+            }
+        if ($request->request->get('mardiEnvoyer', '') == 'mardiEnvoyer') {
+            if ($reservationMardi->isMidi()==null){
+                $reservationMardi->setMidi(false);
+            }
+            if ($reservationMardi->isSoir()==null){
+                $reservationMardi->setSoir(false);
+            }
+
+            $reservationMardi->setDate($dateMardiFinal);
+            $em->persist($reservationMardi);
+            $em->flush();
+
+            }
+        if ($request->request->get('mercrediEnvoyer', '') == 'mercrediEnvoyer') {
+            if ($reservationMercredi->isMidi()==null){
+                $reservationMercredi->setMidi(false);
+            }
+            if ($reservationMercredi->isSoir()==null){
+                $reservationMercredi->setSoir(false);
+            }
+
+            $reservationMercredi->setDate($dateMercrediFinal);
+            $em->persist($reservationMercredi);
+            $em->flush();
 
         }
+        if ($request->request->get('jeudiEnvoyer', '') == 'jeudiEnvoyer') {
+            if ($reservationJeudi->isMidi()==null){
+                $reservationJeudi->setMidi(false);
+            }
+            if ($reservationJeudi->isSoir()==null){
+                $reservationJeudi->setSoir(false);
+            }
 
+            $reservationJeudi->setDate($dateJeudiFinal);
+            $em->persist($reservationJeudi);
+            $em->flush();
 
+        }
+        if ($request->request->get('vendrediEnvoyer', '') == 'vendrediEnvoyer') {
+            if ($reservationVendredi->isMidi()==null){
+                $reservationVendredi->setMidi(false);
+            }
+            if ($reservationVendredi->isSoir()==null){
+                $reservationVendredi->setSoir(false);
+            }
+
+            $reservationVendredi->setDate($dateVendrediFinal);
+            $em->persist($reservationVendredi);
+            $em->flush();
+
+        }
+        if ($request->request->get('toutEnvoyer', '') == 'toutEnvoyer') {
+            if ($reservationLundi->isMidi()==null){
+                $reservationLundi->setMidi(false);
+            }
+            if ($reservationLundi->isSoir()==null){
+                $reservationLundi->setSoir(false);
+            }
+
+            $reservationLundi->setDate($dateLundiFinal);
+            $em->persist($reservationLundi);
+
+            if ($reservationMardi->isMidi()==null){
+                $reservationMardi->setMidi(false);
+            }
+            if ($reservationMardi->isSoir()==null){
+                $reservationMardi->setSoir(false);
+            }
+
+            $reservationMardi->setDate($dateMardiFinal);
+            $em->persist($reservationMardi);
+
+            if ($reservationMercredi->isMidi()==null){
+                $reservationMercredi->setMidi(false);
+            }
+            if ($reservationMercredi->isSoir()==null){
+                $reservationMercredi->setSoir(false);
+            }
+
+            $reservationMercredi->setDate($dateMercrediFinal);
+            $em->persist($reservationMercredi);
+
+            if ($reservationJeudi->isMidi()==null){
+                $reservationJeudi->setMidi(false);
+            }
+            if ($reservationJeudi->isSoir()==null){
+                $reservationJeudi->setSoir(false);
+            }
+
+            $reservationJeudi->setDate($dateJeudiFinal);
+            $em->persist($reservationJeudi);
+
+            if ($reservationVendredi->isMidi()==null){
+                $reservationVendredi->setMidi(false);
+            }
+            if ($reservationVendredi->isSoir()==null){
+                $reservationVendredi->setSoir(false);
+            }
+
+            $reservationVendredi->setDate($dateVendrediFinal);
+            $em->persist($reservationVendredi);
+
+            $em->flush();
+
+        }
 
         return $this->render('reservation/index.html.twig', [
             'controller_name' => 'ReservationController',
@@ -51,13 +187,19 @@ class ReservationController extends AbstractController
             'Mercredi'=>$Mercredi,
             'Jeudi'=>$Jeudi,
             'Vendredi'=>$Vendredi,
-            'LundiPlus'=>$LundiPlus,
-            'MardiPlus'=>$MardiPlus,
-            'MercrediPlus'=>$MercrediPlus,
-            'JeudiPlus'=>$JeudiPlus,
-            'VendrediPlus'=>$VendrediPlus,
+            'dateLundi'=>$getLundi,
+            'dateMardi'=>$dateMardiFinal,
+            'dateMecredi'=>$dateMercrediFinal,
+            'dateJeudi'=>$dateJeudiFinal,
+            'dateVendredi'=>$dateVendrediFinal,
 
-            'formValidationRepas'=> $form->createView()
+            'formValidationRepasLundi'=> $formLundi->createView(),
+            'formValidationRepasMardi'=> $formMardi->createView(),
+            'formValidationRepasMercredi'=> $formMercredi->createView(),
+            'formValidationRepasJeudi'=> $formMercredi->createView(),
+            'formValidationRepasVendredi'=> $formMercredi->createView(),
+            'formValidationTout'=> $form->createView(),
+
         ]);
     }
 
