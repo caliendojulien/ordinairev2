@@ -22,6 +22,9 @@
             {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li><a href="{{ path('accueil_listeUtilisateursFormations') }}">Gestion</a></li>
             {% endif %}
+            {% if is_granted('ROLE_UTILISATEUR') %}
+                <li><a href="{{ path('app_reservation') }}">Réservation</a></li>
+            {% endif %}
             {% if app.user %}
                 <li> <a href="{{ path('app_logout') }}">Déconnection</a></li>
             {% endif %}
