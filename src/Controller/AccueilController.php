@@ -127,7 +127,7 @@ class AccueilController extends AbstractController
         $formationForm->handleRequest($request);
 
         if ($utilisateurForm->isSubmitted() && $utilisateurForm->isValid()) {
-            $utilisateur->setRoles(['ROLE_USER']);
+            $utilisateur->setRoles(['ROLE_UTILISATEUR']);
             $utilisateur->setPassword(
                 $userPasswordHasher->hashPassword(
                     $utilisateur,
