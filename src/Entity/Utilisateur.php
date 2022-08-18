@@ -42,7 +42,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
 
-    public function __construct()
+    public function __toString() : string{
+        return $this->nom.' '.$this->prenom;
+    }
+public function __construct()
     {
         $this->reservation = new ArrayCollection();
     }

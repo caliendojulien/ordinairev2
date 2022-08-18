@@ -28,6 +28,12 @@ class Formation
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Utilisateur::class)]
     private Collection $utilisateurs;
 
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
+
     public function __construct()
     {
         $this->utilisateurs = new ArrayCollection();
