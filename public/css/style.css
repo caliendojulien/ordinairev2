@@ -18,8 +18,6 @@ nav ul{
     display: flex;
     justify-content: center;
     list-style-type: none;
-    background-color: #E4DCCF;
-    border: 1px solid black;
 }
 
 nav ul li{
