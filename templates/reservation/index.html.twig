@@ -3,7 +3,11 @@
 {% block title %}Reservation{% endblock %}
 
 {% block body %}
+    <div id="paragrapheSemaineReservation">
+        <p id="pDate">Semaine {{ numeroSemaine | date("W")+2 }}</p>
+    </div>
     <div id="ensembleReservationForm">
+
         <div id="lundi" class="ensembleDate">
             {{ form_start(formValidationRepasLundi) }}
             <div>
@@ -106,7 +110,7 @@
             </div>
             {{ form_end(formValidationRepasJeudi, {'render_rest': false}) }}
         </div>
-        <div id="Vendredi" class="ensembleDate">
+        <div id="Vendredi">
             {{ form_start(formValidationRepasVendredi) }}
             <div>
                 <p class="surligner">Vendredi {{ Vendredi | date('d/m/y') }}</p>
@@ -115,31 +119,19 @@
                 <label for="{{ field_name(formValidationRepasVendredi.midi) }}">Midi</label>
                 <input type="checkbox"
                        id="{{ field_name(formValidationRepasVendredi.midi) }}"
-                       name="{{ field_name(formValidationRepasVendredi.midi) }}"
-                >
+                       name="{{ field_name(formValidationRepasVendredi.midi) }}">
             </div>
             <div>
                 <label for="{{ field_name(formValidationRepasVendredi.soir) }}">Soir</label>
                 <input type="checkbox"
                        id="{{ field_name(formValidationRepasVendredi.soir) }}"
-                       name="{{ field_name(formValidationRepasVendredi.soir) }}"
-                >
+                       name="{{ field_name(formValidationRepasVendredi.soir) }}">
             </div>
             <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
             <div>
                 <button name="vendrediEnvoyer" value="vendrediEnvoyer">Envoyer</button>
             </div>
             {{ form_end(formValidationRepasVendredi, {'render_rest': false}) }}
-        </div>
-        <div>
-            {{ form_start(formValidationTout) }}
-            <div id="boutonToutEnvoyer">
-                <button name="toutEnvoyer" value="toutEnvoyer">Tout Envoyer</button>
-            </div>
-        </div>
-        <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
-        <div>
-            {{ form_end(formValidationTout, {'render_rest': false}) }}
         </div>
     </div>
 {% endblock %}

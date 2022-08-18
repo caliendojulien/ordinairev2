@@ -55,11 +55,6 @@ class ReservationController extends AbstractController
         $formVendredi = $this->createForm(ValidationRepasType::class, $reservationVendredi);
         $formVendredi->handleRequest($request);
 
-        $toutEnvoyer = new Reservation();
-        $form = $this->createForm(ValidationRepasType::class, $toutEnvoyer);
-        $form->handleRequest($request);
-
-
         if ($request->request->get('lundiEnvoyer', '') == 'lundiEnvoyer') {
             if ($reservationLundi->isMidi()==null){
                 $reservationLundi->setMidi(false);
@@ -125,60 +120,6 @@ class ReservationController extends AbstractController
             $em->flush();
 
         }
-        if ($request->request->get('toutEnvoyer', '') == 'toutEnvoyer') {
-            if ($reservationLundi->isMidi()==null){
-                $reservationLundi->setMidi(false);
-            }
-            if ($reservationLundi->isSoir()==null){
-                $reservationLundi->setSoir(false);
-            }
-
-            $reservationLundi->setDate($dateLundiFinal);
-            $em->persist($reservationLundi);
-
-            if ($reservationMardi->isMidi()==null){
-                $reservationMardi->setMidi(false);
-            }
-            if ($reservationMardi->isSoir()==null){
-                $reservationMardi->setSoir(false);
-            }
-
-            $reservationMardi->setDate($dateMardiFinal);
-            $em->persist($reservationMardi);
-
-            if ($reservationMercredi->isMidi()==null){
-                $reservationMercredi->setMidi(false);
-            }
-            if ($reservationMercredi->isSoir()==null){
-                $reservationMercredi->setSoir(false);
-            }
-
-            $reservationMercredi->setDate($dateMercrediFinal);
-            $em->persist($reservationMercredi);
-
-            if ($reservationJeudi->isMidi()==null){
-                $reservationJeudi->setMidi(false);
-            }
-            if ($reservationJeudi->isSoir()==null){
-                $reservationJeudi->setSoir(false);
-            }
-
-            $reservationJeudi->setDate($dateJeudiFinal);
-            $em->persist($reservationJeudi);
-
-            if ($reservationVendredi->isMidi()==null){
-                $reservationVendredi->setMidi(false);
-            }
-            if ($reservationVendredi->isSoir()==null){
-                $reservationVendredi->setSoir(false);
-            }
-
-            $reservationVendredi->setDate($dateVendrediFinal);
-            $em->persist($reservationVendredi);
-
-            $em->flush();
-
-        }
 
         return $this->render('reservation/index.html.twig', [
             'controller_name' => 'ReservationController',
@@ -198,8 +139,7 @@ class ReservationController extends AbstractController
             'formValidationRepasMardi'=> $formMardi->createView(),
             'formValidationRepasMercredi'=> $formMercredi->createView(),
             'formValidationRepasJeudi'=> $formMercredi->createView(),
-            'formValidationRepasVendredi'=> $formMercredi->createView(),
-            'formValidationTout'=> $form->createView(),
+            'formValidationRepasVendredi'=> $formMercredi->createView()
 
         ]);
     }
