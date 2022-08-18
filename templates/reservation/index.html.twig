@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!{% endblock %}
+
+{% block body %}
+    <div>
+        <div id="lundi">
+            {{ form_start(formValidationRepasLundi) }}
+            <div>
+                <p>Lundi {{ Lundi | date('d/m/y') }}</p>
+                <label for="{{ field_name(formValidationRepasLundi.midi) }}">Midi</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasLundi.midi) }}"
+                       name="{{ field_name(formValidationRepasLundi.midi) }}"
+                       checked
+                >
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasLundi.soir) }}">Soir</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasLundi.soir) }}"
+                       name="{{ field_name(formValidationRepasLundi.soir) }}"
+                >
+            </div>
+                <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+            <div>
+                <button name="lundiEnvoyer" value="lundiEnvoyer">Envoyer</button>
+            </div>
+            {{ form_end(formValidationRepasLundi, {'render_rest': false}) }}
+        </div>
+        <div id="Mardi">
+            {{ form_start(formValidationRepasMardi) }}
+            <div>
+                <p>Mardi {{ Mardi | date('d/m/y') }}</p>
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasMardi.midi) }}">Midi</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasMardi.midi) }}"
+                       name="{{ field_name(formValidationRepasMardi.midi) }}"
+                       checked
+                >
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasMardi.soir) }}">Soir</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasMardi.soir) }}"
+                       name="{{ field_name(formValidationRepasMardi.soir) }}"
+                >
+            </div>
+                <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+            <div>
+                <button name="mardiEnvoyer" value="mardiEnvoyer">Envoyer</button>
+            </div>
+            {{ form_end(formValidationRepasMardi, {'render_rest': false}) }}
+        </div>
+        <div id="Mercredi">
+            {{ form_start(formValidationRepasMercredi) }}
+            <div>
+                <p>Mercredi {{ Mercredi | date('d/m/y') }}</p>
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasMercredi.midi) }}">Midi</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasMercredi.midi) }}"
+                       name="{{ field_name(formValidationRepasMercredi.midi) }}"
+                       checked
+                >
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasMercredi.soir) }}">Soir</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasMercredi.soir) }}"
+                       name="{{ field_name(formValidationRepasMercredi.soir) }}"
+                >
+            </div>
+                <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+            <div>
+                <button name="mercrediEnvoyer" value="mercrediEnvoyer">Envoyer</button>
+            </div>
+            {{ form_end(formValidationRepasMercredi, {'render_rest': false}) }}
+        </div>
+        <div id="Jeudi">
+            {{ form_start(formValidationRepasJeudi) }}
+            <div>
+                <p>Jeudi {{ Jeudi | date('d/m/y') }}</p>
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasJeudi.midi) }}">Midi</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasJeudi.midi) }}"
+                       name="{{ field_name(formValidationRepasJeudi.midi) }}"
+                       checked
+                >
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasJeudi.soir) }}">Soir</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasJeudi.soir) }}"
+                       name="{{ field_name(formValidationRepasJeudi.soir) }}"
+                >
+            </div>
+                <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+            <div>
+                <button name="jeudiEnvoyer" value="jeudiEnvoyer">Envoyer</button>
+            </div>
+            {{ form_end(formValidationRepasJeudi, {'render_rest': false}) }}
+        </div>
+        <div id="Vendredi">
+            {{ form_start(formValidationRepasVendredi) }}
+            <div>
+                <p>Vendredi {{ Vendredi | date('d/m/y') }}</p>
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasVendredi.midi) }}">Midi</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasVendredi.midi) }}"
+                       name="{{ field_name(formValidationRepasVendredi.midi) }}"
+                >
+            </div>
+            <div>
+                <label for="{{ field_name(formValidationRepasVendredi.soir) }}">Soir</label>
+                <input type="checkbox"
+                       id="{{ field_name(formValidationRepasVendredi.soir) }}"
+                       name="{{ field_name(formValidationRepasVendredi.soir) }}"
+                >
+            </div>
+                <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+            <div>
+                <button name="vendrediEnvoyer" value="vendrediEnvoyer">Envoyer</button>
+            </div>
+            {{ form_end(formValidationRepasVendredi, {'render_rest': false}) }}
+        </div>
+        <div>
+            {{ form_start(formValidationTout) }}
+            <div>
+                <button name="toutEnvoyer" value="toutEnvoyer">Tout Envoyer</button>
+            </div>
+            </div>
+                <input type="hidden" name="token" value="{{ csrf_token('nomFormulaire') }}"/>
+            <div>
+            {{ form_end(formValidationTout, {'render_rest': false}) }}
+        </div>
+    </div>
+{% endblock %}
