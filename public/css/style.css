@@ -4,6 +4,7 @@
     border: 1px solid black;
     padding-top: 1em;
     padding-left: 1em;
+    align-items: center;
     background: linear-gradient(180deg, rgba(0,0,0,0.87718837535014) 44%, rgba(103,103,103,1) 100%);
 }
 
