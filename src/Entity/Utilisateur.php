@@ -44,10 +44,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
 
-    public function __toString() : string{
-        return $this->nom.' '.$this->prenom;
+    public function __toString(): string
+    {
+        return $this->nom . ' ' . $this->prenom;
     }
-public function __construct()
+    public function __construct()
     {
         $this->reservation = new ArrayCollection();
     }
@@ -76,7 +77,7 @@ public function __construct()
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -86,7 +87,7 @@ public function __construct()
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_UTILISATEUR';
 
         return array_unique($roles);
     }
@@ -108,8 +109,7 @@ public function __construct()
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
-
+        $this->password =$password;
         return $this;
     }
 
