@@ -41,7 +41,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $reservation;
 
     #[ORM\ManyToOne(inversedBy: 'utilisateurs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Formation $formation = null;
 
     public function __toString(): string
